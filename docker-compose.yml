@@ -42,6 +42,11 @@ services:
       args:
         ELASTIC_VERSION: ${ELASTIC_VERSION}
     volumes:
+      # bind the host config file into the container
+      - type: bind
+        source: ./elasticsearch/config/elasticsearch.yml
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        read_only: true
       # named volume for data
       - elasticsearch:/usr/share/elasticsearch/data
     ports:
